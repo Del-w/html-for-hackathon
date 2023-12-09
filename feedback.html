@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        .post-container {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .comments-container {
+            margin-top: 20px;
+        }
+
+        .comment {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .heading{
+          text-decoration: underline;
+          font-weight: bold;
+          margin-bottom: 1px;
+        }
+        .source{
+          margin-top:1px;
+          text-decoration:underline;
+        }
+        .rows{
+        display:flex;
+        flex-direction: row;
+        height: 80%;
+        align-items: center;
+        }
+        .cols{
+        flex-basis: 50%;
+       margin-top: 10px;
+       margin-bottom: 10px;
+       margin-right: 10%;
+        }
+    
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Forum</h1>
+    </header>
+
+    <main>
+        <div class="post-container">
+          <div class="row">
+            <div class="cols">
+            <h2 class="heading"> A SITUATION</h2>
+            <h6 class="source"> posted by:A J Rahman on 9/12/2023</h6>
+            <p> A man who got shot comes to me for treatment,what do i do?.Do i attend to his wounds and then call the police or call the police and then attend to his wounds?</p>
+        </div>
+
+        <div class="comments-container" id="commentsContainer">
+            <!-- Comments will be dynamically added here -->
+        </div>
+
+        <textarea id="commentContent" placeholder="Write your comment..."></textarea>
+        <button onclick="submitComment()">Submit Comment</button>
+        </div>
+        <div class="cols2">
+          
+        </div>
+    </main>
+
+    <script>
+        function submitComment() {
+            const commentContent = document.getElementById('commentContent').value;
+
+            // Simulating a backend API call to add a comment
+            addComment(commentContent);
+
+            // Clear the textarea after submitting the comment
+            document.getElementById('commentContent').value = '';
+        }
+
+        function addComment(content) {
+            // Simulating a backend storage mechanism
+            const commentsContainer = document.getElementById('commentsContainer');
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'comment';
+            commentDiv.innerHTML = `<p>User: ${content}</p>`;
+            commentsContainer.appendChild(commentDiv);
+        }
+    </script>
+
+</body>
+</html>

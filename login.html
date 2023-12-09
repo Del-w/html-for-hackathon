@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- css links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Vina+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lgstyles.css">
+
+</head>
+
+<body>
+    
+    <form id="loginForm">
+        <h2>Login</h2>
+        <br>
+        <label for="userType">Select User Type:</label>
+        <br>
+        <select id="userType" name="userType" onchange="toggleFields()" required>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+        </select>
+        <br>
+        <div class="patient-fields">
+            <label for="userName">Name:</label>
+            <br>
+            <input type="text" id="userName" name="userName" required>
+            <br>
+            <label for="userPhoneNumber">Phone Number:</label>
+            <br>
+            <input type="tel" id="userPhoneNumber" name="userPhoneNumber" pattern="[0-9]{10}" required>
+        </div>
+        <div class="doctor-fields">
+            <label for="adminId">Admin ID:</label>
+            <br>
+            <input type="text" id="adminId" name="adminId">
+            <br>
+            <label for="hospitalName">Hospital Name:</label>
+            <br>
+            <select id="hospitalName" name="hospitalName">
+                <option value="hospital0"><i>-- select a hospital</i></option>
+                <option value="hospital1">FR.PULLERS HOSPITAL</option>
+                <option value="hospital2">BJ HOSPITAL</option>
+                <option value="hospital3">HENNAPOYA HOSPITAL</option>
+                
+            </select>
+            <br>
+            <label for="password">Password:</label>
+            <br>
+            <input type="password" id="password" name="password">
+        </div>
+        <br>
+        <button type="button" onclick="submitLoginForm()">LOGIN</button>
+        <p id="errorMessage" class="error-message"></p>
+    </form>
+
+    <script>
+        function toggleFields() {
+            var userType = document.getElementById("userType").value;
+            var patientFields = document.querySelector('.patient-fields');
+            var doctorFields = document.querySelector('.doctor-fields');
+
+            if (userType === "doctor") {
+                patientFields.style.display = "none";
+                doctorFields.style.display = "block";
+            } else {
+                patientFields.style.display = "block";
+                doctorFields.style.display = "none";
+            }
+        }
+
+        function submitLoginForm() {
+            var userType = document.getElementById("userType").value;
+            var userName = document.getElementById("userName").value;
+            var userPhoneNumber = document.getElementById("userPhoneNumber").value;
+
+            var adminId = document.getElementById("adminId").value;
+            var hospitalName = document.getElementById("hospitalName").value;
+            var password = document.getElementById("password").value;
+
+            
+            var nameRegex = /^[a-zA-Z\s]+$/;
+            var phoneRegex = /^[0-9]{10}$/;
+
+            var isValidName = nameRegex.test(userName);
+            var isValidPhone = phoneRegex.test(userPhoneNumber);
+
+            
+            if (userType === "patient" && (!isValidName || !isValidPhone)) {
+                document.getElementById("errorMessage").innerText = "Please enter valid information.";
+                return;
+            }
+
+            
+            document.getElementById("errorMessage").innerText = "";
+
+            
+            var adminIdRegex = /^[a-zA-Z0-9]+$/;
+            var isValidAdminId = adminIdRegex.test(adminId);
+
+            
+            if (userType === "doctor" && !isValidAdminId) {
+                document.getElementById("errorMessage").innerText = "Invalid Admin ID.";
+                return;
+            }
+
+            
+            document.getElementById("errorMessage").innerText = "";
+
+           
+            if (userType === "patient" && isValidName && isValidPhone) {
+                window.location.href = 'patient_homepage.html';
+            } else if (userType === "doctor" && isValidAdminId) {
+                window.location.href = 'doctor_homepage.html';
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="forum.css">
+</head>
+<body>
+
+    <header>
+        <h1>Forum</h1>
+    </header>
+
+    <main>
+        <div class="left-column">
+            <div class="post-container">
+                <h2>SEQUENCE OF PROCEDURE</h2>
+                <h6>by:example on x/x/202x</h6>
+                <p>If a wounded man comes to me,with two bullets in his body,do I call the police before operating </p>
+            </div>
+
+            <div class="comments-container" id="commentsContainer">
+                <!-- Comments will be dynamically added here -->
+            </div>
+
+            <textarea id="commentContent" placeholder="Write your comment..."></textarea>
+            <button onclick="submitComment()">Submit Comment</button>
+        </div>
+
+        <div class="right-column">
+            <!-- Add content here for the right column -->
+            <h2>LOOKING FOR SOMETHING?</h2>
+            <p>this part of the website is currently under development</p>
+        </div>
+    </main>
+
+    <script>
+        function submitComment() {
+            const commentContent = document.getElementById('commentContent').value;
+
+            // Simulating a backend API call to add a comment
+            addComment(commentContent);
+
+            // Clear the textarea after submitting the comment
+            document.getElementById('commentContent').value = '';
+        }
+
+        function addComment(content) {
+            // Simulating a backend storage mechanism
+            const commentsContainer = document.getElementById('commentsContainer');
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'comment';
+            commentDiv.innerHTML = `<p>User: ${content}</p>`;
+            commentsContainer.appendChild(commentDiv);
+        }
+    </script>
+
+</body>
+</html>
